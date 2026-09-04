@@ -1,0 +1,120 @@
+---
+const {
+  eyebrow,
+  title,
+  text,
+} = Astro.props;
+
+const items = [
+  {
+    label: "Users & Devices",
+    icon: "users",
+    position: "top",
+  },
+  {
+    label: "Security",
+    icon: "shield",
+    position: "rightTop",
+  },
+  {
+    label: "Networks",
+    icon: "wifi",
+    position: "rightBottom",
+  },
+  {
+    label: "Data & Backups",
+    icon: "database",
+    position: "bottom",
+  },
+  {
+    label: "Infrastructure",
+    icon: "server",
+    position: "leftBottom",
+  },
+  {
+    label: "Cloud & Microsoft 365",
+    icon: "cloud",
+    position: "leftTop",
+  },
+];
+
+const icons = {
+  users: `
+    <svg viewBox="0 0 24 24">
+      <path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" />
+      <circle cx="9.5" cy="7" r="4" />
+      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
+  `,
+  shield: `
+    <svg viewBox="0 0 24 24">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  `,
+  wifi: `
+    <svg viewBox="0 0 24 24">
+      <path d="M5 13a10 10 0 0 1 14 0" />
+      <path d="M8.5 16.5a5 5 0 0 1 7 0" />
+      <path d="M12 20h.01" />
+    </svg>
+  `,
+  database: `
+    <svg viewBox="0 0 24 24">
+      <ellipse cx="12" cy="5" rx="8" ry="3" />
+      <path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5" />
+      <path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" />
+    </svg>
+  `,
+  server: `
+    <svg viewBox="0 0 24 24">
+      <rect x="4" y="4" width="16" height="6" rx="2" />
+      <rect x="4" y="14" width="16" height="6" rx="2" />
+      <path d="M8 7h.01" />
+      <path d="M8 17h.01" />
+      <path d="M12 7h4" />
+      <path d="M12 17h4" />
+    </svg>
+  `,
+  cloud: `
+    <svg viewBox="0 0 24 24">
+      <path d="M17.5 19H8a5 5 0 1 1 .7-9.95A6.5 6.5 0 0 1 21 12.5a3.5 3.5 0 0 1-3.5 6.5Z" />
+    </svg>
+  `,
+};
+---
+
+<section class="services-ecosystem">
+  <div class="container">
+    <div class="services-ecosystem__grid">
+      <div class="services-ecosystem__content">
+        <p class="eyebrow">{eyebrow}</p>
+
+        <h2 class="main-title">
+          {title}
+        </h2>
+
+        <p class="services-ecosystem__text">
+          {text}
+        </p>
+      </div>
+
+      <div class="services-ecosystem__visual" aria-label="Connected IT service areas">
+        <div class="services-ecosystem__rings" aria-hidden="true"></div>
+
+        <div class="services-ecosystem__center">
+          <span>Your</span>
+          <strong>Business</strong>
+        </div>
+
+        {items.map((item) => (
+          <div class:list={["services-ecosystem__node", `services-ecosystem__node--${item.position}`]}>
+            <div class="services-ecosystem__icon" set:html={icons[item.icon]} />
+            <span>{item.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,80 @@
+---
+const { item } = Astro.props;
+---
+
+<article class="who-card">
+  <div class="who-card__icon" aria-hidden="true">
+    {
+      item.icon === "growth" && (
+        <svg
+          width="44"
+          height="40"
+          viewBox="0 0 44 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1.3609 15.8264L15.3609 2.82642L28.3609 16.8264L41.3609 3.82642"
+            stroke="#A1CD42"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round" 
+          />
+          <path
+            d="M41.3609 11.8264V3.82642H33.3609M3.3609 39.8264V22.8264M15.3609 13.8264V39.8264M27.3609 25.8264V39.8264M39.3609 18.8264V39.8264"
+            stroke="#A1CD42"
+            stroke-width="3"
+          />
+        </svg>
+      )
+    }
+
+    {
+      item.icon === "shield" && (
+      <svg
+  viewBox="0 0 48 48"
+  fill="none"
+  stroke="var(--color-primary)"
+  stroke-width="3"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M24 6l16 6v11c0 10-6.5 16.5-16 20-9.5-3.5-16-10-16-20V12l16-6Z"></path>
+  <path d="M16 24l6 6 11-13"></path>
+</svg>
+      )
+    }
+
+    {
+      item.icon === "team" && (
+        <svg viewBox="0 0 48 48" stroke="var(--color-primary)"
+  stroke-width="3"
+  stroke-linecap="round"
+  stroke-linejoin="round" 
+  fill="none">
+          <path d="M18 23a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z" />
+          <path d="M34 24a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" />
+          <path d="M6 40c1.5-8 6-12 12-12s10.5 4 12 12" />
+          <path d="M26 32c2-2.5 4.5-3.5 8-3.5 5 0 8 3.5 9 10.5" />
+        </svg>
+      )
+    }
+  </div>
+
+  <div class="who-card__content">
+    <h3 class="who-card__title">{item.title}</h3>
+
+    <p class="who-card__text">{item.text}</p>
+  </div>
+
+  <ul class="who-card__features">
+    {
+      item.features.map((feature) => (
+        <li class="who-card__feature">
+          <span class="who-card__check">✓</span>
+          <span>{feature}</span>
+        </li>
+      ))
+    }
+  </ul>
+</article>

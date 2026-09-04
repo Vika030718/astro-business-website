@@ -1,0 +1,87 @@
+---
+type ProcessIcon = "search" | "document" | "monitor" | "growth";
+
+type ProcessStep = {
+  number: string;
+  title: string;
+  text: string;
+  icon: ProcessIcon;
+};
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  steps?: ProcessStep[];
+}
+
+const {
+  eyebrow,
+  title,
+  steps = [],
+} = Astro.props;
+
+const icons = {
+  search: `
+    <svg viewBox="0 0 24 24">
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <path d="m16 16 4 4" />
+    </svg>
+  `,
+  document: `
+    <svg viewBox="0 0 24 24">
+      <path d="M6 3h9l3 3v15H6V3Z" />
+      <path d="M15 3v4h4" />
+      <path d="M9 11h6" />
+      <path d="M9 15h6" />
+    </svg>
+  `,
+  monitor: `
+    <svg viewBox="0 0 24 24">
+      <path d="M4 5h16v11H4V5Z" />
+      <path d="M9 20h6" />
+      <path d="M12 16v4" />
+    </svg>
+  `,
+  growth: `
+    <svg viewBox="0 0 24 24">
+      <path d="M4 17h16" />
+      <path d="M6 15 11 10l4 3 5-7" />
+      <path d="M17 6h3v3" />
+    </svg>
+  `,
+};
+---
+
+<section class="service-process" id="how-it-works">
+  <p class="eyebrow">{eyebrow}</p>
+
+  <h2 class="main-title">
+    {title}
+  </h2>
+
+  <div class="service-process__steps">
+    {steps.map((step) => (
+      <article class="service-process__card">
+        <div class="service-process__card-header">
+          <span class="service-process__number">
+            {step.number}
+          </span>
+
+          <h3 class="service-process__title">
+            {step.title}
+          </h3>
+
+          <span
+            class="service-process__icon"
+            aria-hidden="true"
+            set:html={icons[step.icon] ?? icons.search}
+          />
+        </div>
+
+        <p class="service-process__text">
+          {step.text}
+        </p>
+      </article>
+    ))}
+  </div>
+</section>

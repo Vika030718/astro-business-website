@@ -1,0 +1,24 @@
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(161, 205, 66, 0.35);
+  border-radius: 50%;
+  background: rgba(161, 205, 66, 0.08);
+  color: var(--color-primary-dark);
+  transition: 0.2s ease;
+}
+
+.social-link:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+.social-link__icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}

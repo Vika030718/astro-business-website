@@ -1,0 +1,92 @@
+.hero-collage {
+  position: relative;
+  width: 100%;
+  min-height: 460px;
+  isolation: isolate;
+}
+
+.hero-collage img {
+  border-radius: var(--radius-md);
+}
+
+.hero-collage__image {
+  position: absolute;
+  display: block;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+/* большая основная картинка */
+.hero-collage__image--main {
+  left: 0;
+  top: 96px;
+  width: 68%;
+  height: 280px;
+  z-index: 4;
+}
+
+/* верхняя правая картинка */
+.hero-collage__image--top {
+  right: 0;
+  top: 28px;
+  width: 42%;
+  height: 180px;
+  z-index: 3;
+}
+
+/* нижняя правая картинка */
+.hero-collage__image--bottom {
+  right: 24px;
+  bottom: 32px;
+  width: 46%;
+  height: 205px;
+  z-index: 2;
+}
+
+/* зеленые квадраты */
+.hero-collage__square {
+  position: absolute;
+  display: block;
+  background: var(--color-primary);
+  border-radius: var(--radius-md);
+  z-index: 5;
+}
+
+.hero-collage__square--small {
+  top: 14px;
+  right: 38%;
+  width: 42px;
+  height: 42px;
+}
+
+.hero-collage__square--large {
+  left: -33px;
+  bottom: 52px;
+  width: 72px;
+  height: 72px;
+}
+
+/* точки */
+.hero-collage__dots {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background-image: radial-gradient(
+    var(--color-border) 1.5px,
+    transparent 1.5px
+  );
+  background-size: 14px 14px;
+  opacity: 0.75;
+  z-index: 1;
+}
+
+.hero-collage__dots--top {
+  top: 72px;
+  right: 12px;
+}
+
+.hero-collage__dots--bottom {
+  left: 34%;
+  bottom: 38px;
+}

@@ -1,0 +1,66 @@
+---
+const {
+  navItems = [],
+  support,
+} = Astro.props;
+
+
+
+const supportPhoneHref = support?.phoneHref ?? support?.phone?.replaceAll("-", "");
+---
+
+<section class="service-layout">
+  <div class="service-layout__container container">
+    <aside class="service-layout__sidebar" aria-label="Service page navigation">
+      <nav class="service-layout__nav">
+        <span class="service-layout__nav-marker" aria-hidden="true"></span>
+        
+        {navItems.map((item, index) => (
+          <a
+            href={item.href}
+            class:list={[
+              "service-layout__nav-link",
+              { "service-layout__nav-link--active": index === 0 },
+            ]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+      
+      {support && (
+        <div class="service-layout__support">
+          <div class="service-layout__support-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 12a8 8 0 0 1 16 0" />
+              <path d="M4 12v4a2 2 0 0 0 2 2h1v-6H6a2 2 0 0 0-2 2Z" />
+              <path d="M20 12v4a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2Z" />
+              <path d="M9 20h3a3 3 0 0 0 3-3" />
+            </svg>
+          </div>
+      
+          <p class="service-layout__support-title">
+            {support.title}
+          </p>
+      
+          <p class="service-layout__support-copy">
+            {support.text}
+          </p>
+      
+          <a class="service-layout__support-phone" href={`tel:${supportPhoneHref}`}>
+            {support.phone}
+          </a>
+      
+          <p class="service-layout__support-note">
+            {support.note}
+          </p>
+        </div>
+      )}
+    </aside>
+
+    <div class="service-layout__content">
+      <slot />
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,51 @@
+---
+import { siteContent } from "../../i18n/siteContent";
+import { servicesNavigation } from "../../data/navigation";
+import { getRoute } from "../../data/siteRoutes";
+import { getNavigation } from "../../utils/getNavigation";
+
+const { lang = "en" } = Astro.props;
+
+const labels = siteContent[lang].navigation.labels;
+
+const serviceItems = getNavigation(
+  servicesNavigation,
+  lang,
+  labels
+);
+---
+
+<div id="main-menu" class="nav-links">
+  <a href={getRoute("home", lang)}>{labels.home}</a>
+
+  <div class="nav-dropdown">
+    <a
+      class="nav-dropdown__trigger"
+      href={getRoute("servicesOverview", lang)}
+      aria-haspopup="true"
+    >
+      {labels.servicesOverview}
+
+      <span class="nav-dropdown__icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 1024 1024">
+          <path d="M0 0h1024v1024H0z" fill="none" />
+          <path fill="currentColor" d="M488.8 344.3L149 701a32 32 0 0 0 0 44.2l.4.3a29.4 29.4 0 0 0 42.7 0l320-335.8l319.8 335.8a29.4 29.4 0 0 0 42.7 0l.4-.3a32 32 0 0 0 0-44.2L535.2 344.3a32 32 0 0 0-46.4 0" />
+        </svg>
+      </span>
+    </a>
+
+    <div class="nav-dropdown__menu">
+      {
+        serviceItems.map((service) => (
+          <a href={service.href}>
+            {service.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+
+  <a href={getRoute("about", lang)}>{labels.about}</a>
+  <a href={getRoute("blog", lang)}>{labels.blog}</a>
+  <a href={getRoute("contact", lang)}>{labels.contact}</a>
+</div>

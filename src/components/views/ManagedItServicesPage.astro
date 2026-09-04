@@ -1,0 +1,147 @@
+---
+import { siteContent } from "../../i18n/siteContent";
+type Lang = keyof typeof siteContent;
+const { lang = "en" } = Astro.props as { lang?: Lang };
+const prefix = lang === "fr" ? "/fr" : "";
+const pageText = siteContent[lang].services.managedItServicesPage;
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../common/PageHero.astro";
+import ServiceHeroVisual from "../services/ServiceHeroVisual.astro";
+import ServiceLayout from "../services/ServiceLayout.astro";
+import ServiceOverview from "../services/ServiceOverview.astro";
+import ServiceIncluded from "../services/ServiceIncluded.astro";
+import ServiceProcess from "../services/ServiceProcess.astro";
+import ServiceComparison from "../services/ServiceComparison.astro";
+import ServiceConnectedServices from "../services/ServiceConnectedServices.astro";
+import ServiceAreas from "../services/ServiceAreas.astro";
+import SectionContactCta from "../../components/common/SectionContactCta.astro";
+import FaqAccordion from "../../components/common/FaqAccordion.astro";
+
+
+import heroImg from  "./../../assets/images/services/managed-it-services-team.jpg";
+
+---
+
+<BaseLayout 
+  lang={lang} 
+  title={pageText.seo.title} 
+  description={pageText.seo.description}
+  routeKey="managedIt"
+>
+  <PageHero
+    eyebrow={pageText.hero.eyebrow}
+    title={pageText.hero.title}
+    text={pageText.hero.text}
+    buttonText={pageText.hero.button.label}
+    buttonHref={pageText.hero.button.href}
+  >
+    <ServiceHeroVisual
+      slot="media"
+      image={heroImg}
+      topBadge={pageText.hero.badges.top}
+      bottomBadge={pageText.hero.badges.bottom}
+    />
+  </PageHero>
+
+  <ServiceLayout navItems={pageText.navItems} support={pageText.support}>
+   
+    <ServiceOverview
+        eyebrow={pageText.overview.eyebrow}
+        title={pageText.overview.title}
+        paragraphs={pageText.overview.paragraphs}
+        highlights={pageText.overview.highlights}
+      />
+
+      
+      <section class="service-fit" id="who-its-for">
+        <div class="service-fit__intro">
+          <p class="eyebrow">{pageText.whoItsFor.eyebrow}</p>
+      
+          <h2 class="main-title">
+            {pageText.whoItsFor.title}
+          </h2>
+      
+          <p class="service-fit__text">
+            {pageText.whoItsFor.text}
+          </p>
+        </div>
+      
+        <div class="service-fit__list">
+          {pageText.whoItsFor.items.map((item, index) => (
+            <article class="service-fit__item">
+              <span class="service-fit__number" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+      
+              <div class="service-fit__item-content">
+                <h3 class="service-fit__title">
+                  {item.title}
+                </h3>
+      
+                <p class="service-fit__description">
+                  {item.text}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <ServiceIncluded
+        eyebrow={pageText.included.eyebrow}
+        title={pageText.included.title}
+        items={pageText.included.items}
+      />
+
+
+      <ServiceProcess
+        eyebrow={pageText.process.eyebrow}
+        title={pageText.process.title}
+        steps={pageText.process.steps}
+      />
+
+      <ServiceComparison
+        eyebrow={pageText.comparison.eyebrow}
+        title={pageText.comparison.title}
+        text={pageText.comparison.text}
+        columns={pageText.comparison.columns}
+        rows={pageText.comparison.rows}
+      />
+
+      <ServiceConnectedServices
+        eyebrow={pageText.connectedServices.eyebrow}
+        title={pageText.connectedServices.title}
+        text={pageText.connectedServices.text}
+        ariaLabel={pageText.connectedServices.ariaLabel}
+        services={pageText.connectedServices.services}
+      />
+    
+      <ServiceAreas
+        eyebrow={pageText.areas.eyebrow}
+        title={pageText.areas.title}
+        text={pageText.areas.text}
+        areas={pageText.areas.items}
+      />
+
+  </ServiceLayout>
+
+  <section class="container" id="faq">
+    <div class="faq">
+      <div>
+        <p class="eyebrow">{pageText.faq.eyebrow}</p>
+      
+        <h2 class="main-title">
+          {pageText.faq.title}
+        </h2>
+      </div>
+      <FaqAccordion items={pageText.faq.items} />
+    </div>
+    
+  
+    
+  </section>
+
+  <SectionContactCta lang={lang}/>
+
+</BaseLayout>

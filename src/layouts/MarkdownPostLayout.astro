@@ -1,0 +1,65 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import SectionContactCta from "../components/common/SectionContactCta.astro";
+
+const { frontmatter } = Astro.props;
+
+const title = frontmatter.title;
+const description = frontmatter.description;
+const pubDate = frontmatter.pubDate;
+const author = frontmatter.author;
+const image = frontmatter.image?.url;
+const imageAlt = frontmatter.image?.alt || "";
+const tags = frontmatter.tags || [];
+
+const formattedDate = pubDate
+  ? new Date(pubDate).toLocaleDateString("en-CA", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+  : "";
+
+  const canonicalPath = Astro.url.pathname;
+---
+
+<BaseLayout 
+  title={title} 
+  description={description}  
+  canonicalPath={canonicalPath}
+  noFrenchAlternate={true}
+>
+  <article class="blog-post">
+    <div class="container">
+      <a class="blog-post__back" href="/blog/">Back to blog</a>
+
+      <header class="blog-post__header">
+        <div class="blog-post__meta">
+          {tags[0] && <span>{tags[0]}</span>}
+          {formattedDate && <span>{formattedDate}</span>}
+          {author && <span>{author}</span>}
+        </div>
+
+        <h1 class="blog-post__title">{title}</h1>
+
+        {description && (
+          <p class="blog-post__description">
+            {description}
+          </p>
+        )}
+      </header>
+
+      {image && (
+        <div class="blog-post__image">
+          <img src={image} alt={imageAlt} />
+        </div>
+      )}
+
+      <div class="blog-post__content">
+        <slot />
+      </div>
+    </div>
+  </article>
+
+  <SectionContactCta />
+</BaseLayout>

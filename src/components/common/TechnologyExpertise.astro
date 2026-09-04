@@ -1,0 +1,58 @@
+---
+const {
+  eyebrow,
+  title,
+  text,
+  secondaryText,
+  technologies = [],
+} = Astro.props;
+---
+
+<section class="technology-expertise section">
+  <div class="container technology-expertise__grid">
+    <div class="technology-expertise__content">
+      {eyebrow && (
+        <p class="eyebrow">{eyebrow}</p>
+      )}
+
+      <h2 class="main-title">
+        {title}
+      </h2>
+
+      <p class="technology-expertise__text">
+        {text}
+      </p>
+
+      {secondaryText && (
+        <p class="technology-expertise__text technology-expertise__text--secondary">
+          {secondaryText}
+        </p>
+      )}
+    </div>
+
+    <div
+      class="technology-expertise__technologies"
+      aria-label={title}
+    >
+      {technologies.map((technology) => (
+        <div class="technology-expertise__item">
+          <span
+            class="technology-expertise__icon"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24">
+              <rect x="4" y="4" width="6" height="6" rx="1" />
+              <rect x="14" y="4" width="6" height="6" rx="1" />
+              <rect x="4" y="14" width="6" height="6" rx="1" />
+              <rect x="14" y="14" width="6" height="6" rx="1" />
+            </svg>
+          </span>
+
+          <span class="technology-expertise__name">
+            {technology}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

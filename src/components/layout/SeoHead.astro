@@ -1,0 +1,92 @@
+---
+import { seoDefaults } from "../../data/seoDefaults";
+import { getRoute, type Lang, type RouteKey } from "../../data/siteRoutes";
+import { pageSeo } from "../../data/pageSeo";
+
+interface Props {
+  lang?: Lang;
+  routeKey?: RouteKey;
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  noFrenchAlternate?: boolean;
+}
+
+const {
+  lang = "en",
+  routeKey,
+  title,
+  description,
+  canonicalPath,
+  noFrenchAlternate = false,
+} = Astro.props;
+
+const defaults = seoDefaults[lang];
+
+const routeSettings = routeKey ? pageSeo[routeKey] : undefined;
+
+const cleanSiteUrl = seoDefaults.siteUrl.replace(/\/$/, "");
+
+const makeUrl = (path: string) => {
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  return new URL(cleanPath, `${cleanSiteUrl}/`).toString();
+};
+
+const normalizePagePath = (path: string) => {
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+
+  if (cleanPath === "/") {
+    return "/";
+  }
+
+  return cleanPath.endsWith("/") ? cleanPath : `${cleanPath}/`;
+};
+
+const finalTitle = title
+  ? defaults.titleTemplate.replace("%s", title)
+  : defaults.defaultTitle;
+
+const finalDescription = description || defaults.defaultDescription;
+
+const currentPath = canonicalPath
+  ? normalizePagePath(canonicalPath)
+  : routeKey
+    ? getRoute(routeKey, lang)
+    : normalizePagePath(Astro.url.pathname);
+
+const canonicalUrl = makeUrl(currentPath);
+
+const showAlternates = routeKey && !noFrenchAlternate;
+
+const alternateEn = routeKey ? makeUrl(getRoute(routeKey, "en")) : "";
+const alternateFr = routeKey ? makeUrl(getRoute(routeKey, "fr")) : "";
+
+const ogImageUrl = makeUrl(seoDefaults.ogImage);
+---
+
+<title>{finalTitle}</title>
+<meta name="description" content={finalDescription} />
+
+<link rel="canonical" href={canonicalUrl} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+{routeSettings?.noindex ? (
+  <meta name="robots" content="noindex, nofollow" />
+) : (
+  <meta name="robots" content="index, follow" />
+)}
+
+{showAlternates && (
+  <>
+    <link rel="alternate" hreflang="en-CA" href={alternateEn} />
+    <link rel="alternate" hreflang="fr-CA" href={alternateFr} />
+    <link rel="alternate" hreflang="x-default" href={alternateEn} />
+  </>
+)}
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={seoDefaults.siteName} />
+<meta property="og:title" content={finalTitle} />
+<meta property="og:description" content={finalDescription} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={ogImageUrl} />

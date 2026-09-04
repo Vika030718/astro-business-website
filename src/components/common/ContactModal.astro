@@ -1,0 +1,42 @@
+---
+import { siteContent } from "../../i18n/siteContent";
+type Lang = keyof typeof siteContent;
+const { lang = "en" } = Astro.props as { lang?: Lang };
+const modalText = siteContent[lang].contactModal;
+
+import Form from "./Form.astro";
+---
+
+<div class="contact-modal" data-contact-modal aria-hidden="true">
+  <div class="contact-modal__overlay" data-contact-close></div>
+
+  <div
+    class="contact-modal__dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="contact-modal-title"
+  >
+    <button
+      class="contact-modal__close"
+      type="button"
+      data-contact-close
+      aria-label={modalText.closeLabel}
+    >
+      ×
+    </button>
+
+    <div class="contact-modal__content">
+      <p class="eyebrow">{modalText.eyebrow}</p>
+
+      <h2 class="contact-modal__title" id="contact-modal-title">
+        {modalText.title}
+      </h2>
+
+      <p class="contact-modal__text">
+        {modalText.text}
+      </p>
+
+      <Form lang={lang} idPrefix="modal-contact" />
+    </div>
+  </div>
+</div>

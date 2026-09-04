@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+
+const { item, image } = Astro.props;
+---
+
+<article class="cert-card">
+  <div class="cert-card__media">
+    <Image
+      class="cert-card__image"
+      src={image}
+      alt={item.imageAlt}
+      width={180}
+      height={120}
+      loading="lazy"
+    />
+  </div>
+
+  <h3 class="cert-card__title">{item.title}</h3>
+
+  <p class="cert-card__text">{item.text}</p>
+</article>

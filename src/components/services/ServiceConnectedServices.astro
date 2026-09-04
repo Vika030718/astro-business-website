@@ -1,0 +1,40 @@
+---
+const {
+  eyebrow,
+  title,
+  text,
+  ariaLabel,
+  services = [],
+} = Astro.props;
+---
+
+<section class="service-connected" id="related-services">
+  <div class="service-connected__inner">
+    <div class="service-connected__header">
+      <div class="service-connected__heading">
+        <p class="eyebrow">{eyebrow}</p>
+
+        <h2 class="main-title">
+          {title}
+        </h2>
+      </div>
+
+      <p class="service-connected__text">
+        {text}
+      </p>
+    </div>
+
+    <nav class="service-connected__links" aria-label={ariaLabel}>
+      {services.map((service) => (
+        <a class="service-connected__link" href={service.href}>
+          <span>{service.title}</span>
+
+          <svg class="service-connected__arrow" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14" />
+            <path d="m13 6 6 6-6 6" />
+          </svg>
+        </a>
+      ))}
+    </nav>
+  </div>
+</section>

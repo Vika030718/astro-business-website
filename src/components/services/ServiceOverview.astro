@@ -1,0 +1,68 @@
+---
+
+const {
+  eyebrow = "Overview",
+  title,
+  paragraphs = [],
+  highlights = [],
+} = Astro.props;
+
+const icons = {
+  shield: `
+    <svg viewBox="0 0 24 24">
+      <path d="M12 3 19 6v5c0 4.5-2.8 8.6-7 10-4.2-1.4-7-5.5-7-10V6l7-3Z" />
+      <path d="m9 12 2 2 4-5" />
+    </svg>
+  `,
+  clock: `
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
+    </svg>
+  `,
+  location: `
+    <svg viewBox="0 0 24 24">
+      <path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12Z" />
+      <circle cx="12" cy="9" r="2.5" />
+    </svg>
+  `,
+};
+---
+
+<section class="service-overview" id="overview">
+  <div class="service-overview__main">
+    <p class="eyebrow">{eyebrow}</p>
+
+    <h2 class="main-title">
+      {title}
+    </h2>
+
+    <div class="service-overview__text">
+      {paragraphs.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
+    </div>
+  </div>
+
+  <div class="service-overview__highlights" aria-label="Service highlights">
+    {highlights.map((item) => (
+      <div class="service-overview__highlight">
+        <div
+          class="service-overview__icon"
+          aria-hidden="true"
+          set:html={icons[item.icon] ?? icons.shield}
+        />
+
+        <div>
+          <h3 class="service-overview__highlight-title">
+            {item.title}
+          </h3>
+
+          <p class="service-overview__highlight-text">
+            {item.text}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

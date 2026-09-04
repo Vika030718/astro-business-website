@@ -1,0 +1,21 @@
+---
+type Variant = "primary" | "secondary" | "ghost";
+
+const {
+  href = "#",
+  label,
+  variant = "primary",
+} = Astro.props as {
+  href?: string;
+  label: string;
+  variant?: Variant;
+};
+---
+
+<a class={`button-link button-link--${variant}`} href={href}>
+  <span>{label}</span>
+  <svg class="button-link__icon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M5 12h14" />
+    <path d="m13 6 6 6-6 6" />
+  </svg>
+</a>

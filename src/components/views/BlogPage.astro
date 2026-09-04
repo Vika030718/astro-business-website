@@ -1,0 +1,143 @@
+---
+import { siteContent } from "../../i18n/siteContent";
+type Lang = keyof typeof siteContent;
+const { lang = "en" } = Astro.props as { lang?: Lang };
+const pageText = siteContent[lang].blogPage;
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionContactCta from "../../components/common/SectionContactCta.astro";
+
+const postModules = Object.entries(
+  import.meta.glob("../../posts/*.md", { eager: true })
+);
+
+const posts = postModules
+  .map(([path, post]) => {
+    const { frontmatter } = post as any;
+
+    const slug = path
+      .split("/")
+      .pop()
+      ?.replace(".md", "");
+
+    return {
+      title: frontmatter.title,
+      excerpt: frontmatter.description,
+      category: frontmatter.tags?.[0] || pageText.posts.fallbackCategory,
+      date: frontmatter.pubDate,
+      image: frontmatter.image?.url,
+      imageAlt: frontmatter.image?.alt || "",
+      href: `/${slug}/`,
+    };
+  })
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+const featuredPost = posts[0];
+const regularPosts = posts.slice(1);
+---
+
+<BaseLayout
+  title={pageText.seo?.title}
+  description={pageText.seo?.description}
+  lang={lang}
+  routeKey="blog"
+
+>
+  <section class="blog-index">
+    <div class="container">
+      <div class="blog-index__hero">
+        <div class="blog-index__hero-content">
+          <p class="eyebrow">{pageText.hero.eyebrow}</p>
+
+          <h1 class="main-title">
+            {pageText.hero.title}
+          </h1>
+        </div>
+
+        <p class="blog-index__hero-text">
+          {pageText.hero.text}
+        </p>
+      </div>
+
+      {featuredPost && (
+        <article class="blog-index__featured">
+          <div class="blog-index__featured-content">
+            <div class="blog-index__meta">
+              <span>{featuredPost.category}</span>
+              <span>{featuredPost.date}</span>
+            </div>
+
+            <h2 class="blog-index__featured-title">
+              <a href={featuredPost.href}>{featuredPost.title}</a>
+            </h2>
+
+            <p class="blog-index__featured-text">
+              {featuredPost.excerpt}
+            </p>
+
+            <a class="blog-index__read-link" href={featuredPost.href}>
+              {pageText.posts.readArticle}
+            </a>
+          </div>
+
+          {featuredPost.image && (
+            <div class="blog-index__featured-image">
+              <img src={featuredPost.image} alt={featuredPost.imageAlt || ""} />
+            </div>
+          )}
+        </article>
+      )}
+
+      <div class="blog-index__body">
+        <div class="blog-index__side">
+          <p class="eyebrow">{pageText.posts.allPostsEyebrow}</p>
+
+          <h2 class="blog-index__section-title">
+            {pageText.posts.latestTitle}
+          </h2>
+
+          <p>
+            {pageText.posts.postsFound}: {posts.length}
+          </p>
+        </div>
+
+        <div class="blog-index__list">
+          {regularPosts.map((post) => (
+            <article class="blog-index__item">
+              {post.image && (
+                <a
+                  class="blog-index__item-image"
+                  href={post.href}
+                  aria-label={post.title}
+                >
+                  <img src={post.image} alt={post.imageAlt || ""} />
+                </a>
+              )}
+
+              <div class="blog-index__item-main">
+                <div class="blog-index__meta">
+                  <span>{post.category}</span>
+                  <span>{post.date}</span>
+                </div>
+
+                <h3 class="blog-index__item-title">
+                  <a href={post.href}>{post.title}</a>
+                </h3>
+
+                <p class="blog-index__item-text">
+                  {post.excerpt}
+                </p>
+              </div>
+
+              <a class="blog-index__item-link" href={post.href}>
+                {pageText.posts.read}
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <SectionContactCta lang={lang} />
+  </section>
+</BaseLayout>

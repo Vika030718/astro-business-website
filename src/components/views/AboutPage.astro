@@ -1,0 +1,227 @@
+---
+import { siteContent } from "../../i18n/siteContent";
+type Lang = keyof typeof siteContent;
+const { lang = "en" } = Astro.props as { lang?: Lang };
+const pageText = siteContent[lang].aboutPage;
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ServiceAreas from "../services/ServiceAreas.astro";
+import SectionContactCta from "../../components/common/SectionContactCta.astro";
+
+import heroMain from "./../../assets/images/team/BusinessCompany-team.png";
+import heroTop from "./../../assets/images/team/camo-office.png";
+
+import { Image } from "astro:assets";
+---
+
+<BaseLayout
+  title={pageText.seo.title}
+  description={pageText.seo.description}
+  lang={lang}
+  routeKey="about"
+>
+  <section class="team-intro">
+    <div class="team-intro__image-wrap">
+      <Image
+        class="team-intro__image"
+        src={heroTop}
+        alt={pageText.team.topImageAlt}
+        width={1600}
+        height={700}
+        loading="eager"
+        fetchpriority="high"
+      />
+
+      <svg
+        class="team-intro__wave"
+        viewBox="0 0 1440 190"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path
+          class="team-intro__wave-glass"
+          d="M0 46
+             C0 14 28 0 72 7
+             C230 49 420 53 620 51
+             C835 49 1035 37 1245 21
+             C1330 15 1395 11 1440 3
+             L1440 24
+             C1395 32 1330 36 1245 42
+             C1035 58 835 70 620 72
+             C420 74 230 70 72 28
+             C28 16 0 32 0 70
+             Z"
+        />
+
+        <path
+          class="team-intro__wave-fill"
+          d="M0 70
+             C0 32 28 16 72 28
+             C230 70 420 74 620 72
+             C835 70 1035 58 1245 42
+             C1330 36 1395 32 1440 24
+             L1440 190
+             L0 190
+             Z"
+        />
+
+        <path
+          class="team-intro__wave-line"
+          d="M0 70
+             C0 32 28 16 72 28
+             C230 70 420 74 620 72
+             C835 70 1035 58 1245 42
+             C1330 36 1395 32 1440 24"
+        />
+      </svg>
+    </div>
+
+    <div class="team-intro__body">
+      <div class="container team-intro__inner">
+        <div class="team-intro__heading">
+          <Image
+            src={heroMain}
+            alt={pageText.team.imageAlt}
+            width={620}
+            height={620}
+            loading="lazy"
+          />
+        </div>
+
+        <div class="team-intro__content">
+          <p class="eyebrow">{pageText.team.eyebrow}</p>
+          <h1 class="main-title">{pageText.team.title}</h1>
+          <span class="team-intro__accent" aria-hidden="true"></span>
+
+          <p class="team-intro__text">{pageText.team.text}</p>
+
+          <ul class="team-intro__list">
+            {pageText.team.items.map((item) => (
+              <li class="team-intro__item">
+                <span class="team-intro__item-line" aria-hidden="true"></span>
+                <span set:html={item} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-support-sections">
+    <div class="about-support-sections__block about-support-sections__block--soft">
+      <div class="container about-support-sections__grid">
+        <div class="about-support-sections__heading">
+          <p class="eyebrow">{pageText.priorities.eyebrow}</p>
+          <h2 class="main-title">{pageText.priorities.title}</h2>
+        </div>
+
+        <div class="about-support-sections__content">
+          <p class="about-support-sections__lead">
+            {pageText.priorities.text}
+          </p>
+
+          <div class="about-support-sections__steps">
+            {pageText.priorities.items.map((item, index) => (
+              <article class="about-support-sections__step">
+                <span class="about-support-sections__number">
+                  {item.number}
+                </span>
+
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
+
+                {index < pageText.priorities.items.length - 1 && (
+                  <span
+                    class="about-support-sections__arrow"
+                    aria-hidden="true"
+                  >
+                  </span>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-support-sections__block">
+      <div class="container about-support-sections__grid about-support-sections__grid--center">
+        <div class="about-support-sections__heading">
+          <p class="eyebrow">{pageText.support.eyebrow}</p>
+          <h2 class="main-title">{pageText.support.title}</h2>
+        </div>
+
+        <div class="about-support-sections__support">
+          <ul class="about-support-sections__list">
+            {pageText.support.items.slice(0, 5).map((item) => (
+              <li>
+                <span aria-hidden="true"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <ul class="about-support-sections__list about-support-sections__list--border">
+            {pageText.support.items.slice(5).map((item) => (
+              <li>
+                <span aria-hidden="true"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <span class="about-support-sections__dots" aria-hidden="true"></span>
+    </div>
+
+    <div class="about-support-sections__block about-support-sections__block--soft">
+      <div class="container about-support-sections__grid">
+        <div class="about-support-sections__heading">
+          <p class="eyebrow">{pageText.updates.eyebrow}</p>
+          <h2 class="main-title">{pageText.updates.title}</h2>
+
+          <p class="about-support-sections__intro">
+            {pageText.updates.text}
+          </p>
+        </div>
+
+        <div class="about-support-sections__timeline">
+          {pageText.updates.items.map((item) => (
+            <article class="about-support-sections__timeline-item">
+              <span
+                class="about-support-sections__dot"
+                aria-hidden="true"
+              ></span>
+
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <span
+        class="about-support-sections__dots about-support-sections__dots--large"
+        aria-hidden="true"
+      ></span>
+    </div>
+  </section>
+
+  <div class="container">
+    <ServiceAreas
+    eyebrow={pageText.areas.eyebrow}
+    title={pageText.areas.title}
+    text={pageText.areas.text}
+    areas={pageText.areas.items}
+  />
+  </div>
+
+  <SectionContactCta lang={lang}/>
+
+</BaseLayout>

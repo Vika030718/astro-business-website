@@ -1,0 +1,10 @@
+---
+import Navigation from "../layout/Navigation.astro";
+const { lang = "en" } = Astro.props;
+---
+
+<button aria-expanded="false" aria-controls="main-menu" class="menu">
+  Menu
+</button>
+
+<Navigation lang={lang} />

@@ -1,0 +1,189 @@
+---
+import { siteContent } from "../../i18n/siteContent";
+type Lang = keyof typeof siteContent;
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+const pageText = siteContent[lang].securityCompliancePage;
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import heroImg from "../../assets/images/services/cybersecurity-services-person-at-work.png";
+import supportImg from "../../assets/images/Business-IT-services.png";
+---
+
+<BaseLayout
+  title={pageText.seo?.title}
+  description={pageText.seo?.description}
+  lang={lang}
+  routeKey=""
+>
+  <div class="case-study">
+    <section class="case-study__hero">
+      <div class="container case-study__hero-grid">
+        <div class="case-study__hero-content">
+          <p class="eyebrow">{pageText.hero.eyebrow}</p>
+
+          <h1 class="main-title">{pageText.hero.title}</h1>
+
+          <p class="case-study__hero-text">
+            {pageText.hero.text}
+          </p>
+        </div>
+
+        <div class="case-study__hero-visual">
+          <img
+            src={heroImg.src}
+            alt=""
+            loading="eager"
+            decoding="async"
+          />
+
+          <div class="case-study__hero-card">
+            {pageText.hero.meta.map((item) => (
+              <div>
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-study__story section">
+      <div class="container case-study__story-grid">
+        <div class="case-study__story-media">
+          <img src={supportImg.src} alt="" loading="lazy" decoding="async" />
+        </div>
+
+        <div class="case-study__story-content">
+          <p class="eyebrow">{pageText.overview.eyebrow}</p>
+
+          <h2 class="main-title">
+            {pageText.overview.title}
+          </h2>
+
+          <p>
+            {pageText.overview.text}
+          </p>
+
+          <div class="case-study__quote-inline">
+            <p>“{pageText.quote.text}”</p>
+            <span>{pageText.quote.author}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-study__split section">
+      <div class="container case-study__split-grid">
+        <div class="case-study__sticky-head">
+          <p class="eyebrow">{pageText.challenges.eyebrow}</p>
+
+          <h2 class="main-title">
+            {pageText.challenges.title}
+          </h2>
+
+          <p>
+            {pageText.challenges.text}
+          </p>
+        </div>
+
+        <div class="case-study__text-list">
+          {pageText.challenges.items.map((item) => (
+            <div class="case-study__text-row">
+              <span></span>
+              <p>{item}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="case-study__approach section">
+      <div class="container">
+        <div class="case-study__section-intro">
+          <p class="eyebrow">{pageText.approach.eyebrow}</p>
+
+          <h2 class="main-title">
+            {pageText.approach.title}
+          </h2>
+
+          <p>
+            {pageText.approach.text}
+          </p>
+        </div>
+
+        <div class="case-study__approach-grid">
+          {pageText.approach.items.map((item, index) => (
+            <article class="case-study__approach-item">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="case-study__outcome section">
+      <div class="container case-study__outcome-grid">
+        <div>
+          <p class="eyebrow">{pageText.results.eyebrow}</p>
+
+          <h2 class="main-title">
+            {pageText.results.title}
+          </h2>
+
+          <p>
+            {pageText.results.text}
+          </p>
+        </div>
+
+        <div class="case-study__outcome-list">
+          {pageText.results.items.map((item) => (
+            <div>{item}</div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="case-study__conclusion section">
+      <div class="container case-study__conclusion-inner">
+        <div>
+          <p class="eyebrow">{pageText.conclusion.eyebrow}</p>
+
+          <h2 class="main-title">
+            {pageText.conclusion.title}
+          </h2>
+        </div>
+
+        <p>
+          {pageText.conclusion.text}
+        </p>
+      </div>
+    </section>
+
+    <section class="case-study__cta">
+      <div class="container">
+        <div class="case-study__cta-inner">
+          <div>
+            <p class="eyebrow">{pageText.cta.eyebrow}</p>
+
+            <h2 class="main-title">
+              {pageText.cta.title}
+            </h2>
+
+            <p>
+              {pageText.cta.text}
+            </p>
+          </div>
+
+          <a class="button button--primary" href={pageText.cta.buttonHref}>
+            {pageText.cta.buttonLabel}
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

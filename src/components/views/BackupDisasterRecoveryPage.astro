@@ -1,0 +1,80 @@
+---
+import { siteContent } from "../../i18n/siteContent";
+type Lang = keyof typeof siteContent;
+const { lang = "en" } = Astro.props as { lang?: Lang };
+const prefix = lang === "fr" ? "/fr" : "";
+const pageText = siteContent[lang].services.backupDisasterRecoveryPage;
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../common/PageHero.astro";
+import ServiceHeroVisual from "../services/ServiceHeroVisual.astro";
+import ServiceLayout from "../services/ServiceLayout.astro";
+import ServiceOverview from "../services/ServiceOverview.astro";
+import ServiceIncluded from "../services/ServiceIncluded.astro";
+import ServiceProcess from "../services/ServiceProcess.astro";
+import ServiceConnectedServices from "../services/ServiceConnectedServices.astro";
+import ServiceAreas from "../services/ServiceAreas.astro";
+import SectionContactCta from "../../components/common/SectionContactCta.astro";
+
+import heroImg from "./../../assets/images/services/Backup-Disaster-Recovery.jpg";
+---
+
+<BaseLayout
+  title={pageText.seo?.title}
+  description={pageText.seo?.description}
+  lang={lang}
+  routeKey="backupDisasterRecovery"
+>
+  <PageHero
+    eyebrow={pageText.hero.eyebrow}
+    title={pageText.hero.title}
+    text={pageText.hero.text}
+    buttonText={pageText.hero.button.label}
+    buttonHref={pageText.hero.button.href}
+  >
+    <ServiceHeroVisual
+      slot="media"
+      image={heroImg}
+      topBadge={pageText.hero.badges.top}
+      bottomBadge={pageText.hero.badges.bottom}
+    />
+  </PageHero>
+
+  <ServiceLayout navItems={pageText.navItems} support={pageText.support}>
+    <ServiceOverview
+      eyebrow={pageText.overview.eyebrow}
+      title={pageText.overview.title}
+      paragraphs={pageText.overview.paragraphs}
+      highlights={pageText.overview.highlights}
+    />
+
+    <ServiceIncluded
+      eyebrow={pageText.included.eyebrow}
+      title={pageText.included.title}
+      items={pageText.included.items}
+    />
+
+    <ServiceProcess
+      eyebrow={pageText.process.eyebrow}
+      title={pageText.process.title}
+      steps={pageText.process.steps}
+    />
+
+    <ServiceConnectedServices
+      eyebrow={pageText.connectedServices.eyebrow}
+      title={pageText.connectedServices.title}
+      text={pageText.connectedServices.text}
+      ariaLabel={pageText.connectedServices.ariaLabel}
+      services={pageText.connectedServices.services}
+    />
+
+    <ServiceAreas
+      eyebrow={pageText.areas.eyebrow}
+      title={pageText.areas.title}
+      text={pageText.areas.text}
+      areas={pageText.areas.items}
+    />
+  </ServiceLayout>
+
+  <SectionContactCta lang={lang} />
+</BaseLayout>

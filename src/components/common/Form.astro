@@ -1,0 +1,138 @@
+---
+import { siteContent } from "../../i18n/siteContent";
+import Button from "./Button.astro";
+
+type Lang = keyof typeof siteContent;
+
+const {
+  lang = "en",
+  idPrefix = "contact",
+} = Astro.props as {
+  lang?: Lang;
+  idPrefix?: string;
+};
+
+const formText = siteContent[lang].contactForm;
+
+const fieldId = (name: string) => `${idPrefix}-${name}`;
+---
+
+<form
+  class="contact-form"
+  name="contact"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  data-contact-form
+>
+  <input type="hidden" name="form-name" value="contact" />
+
+  <p class="contact-form__hidden" aria-hidden="true">
+    <label>
+      {formText.honeypotLabel}
+      <input name="bot-field" tabindex="-1" autocomplete="off" />
+    </label>
+  </p>
+
+  <div class="contact-form__grid">
+    <div class="contact-form__field">
+      <label for={fieldId("name")}>
+        {formText.fields.name.label}
+      </label>
+
+      <input
+        id={fieldId("name")}
+        type="text"
+        name="name"
+        placeholder={formText.fields.name.placeholder}
+        required
+      />
+    </div>
+
+    <div class="contact-form__field">
+      <label for={fieldId("company")}>
+        {formText.fields.company.label}
+      </label>
+
+      <input
+        id={fieldId("company")}
+        type="text"
+        name="company"
+        placeholder={formText.fields.company.placeholder}
+      />
+    </div>
+
+    <div class="contact-form__field">
+      <label for={fieldId("email")}>
+        {formText.fields.email.label}
+      </label>
+
+      <input
+        id={fieldId("email")}
+        type="email"
+        name="email"
+        placeholder={formText.fields.email.placeholder}
+        required
+      />
+    </div>
+
+    <div class="contact-form__field">
+      <label for={fieldId("phone")}>
+        {formText.fields.phone.label}
+      </label>
+
+      <input
+        id={fieldId("phone")}
+        type="tel"
+        name="phone"
+        placeholder={formText.fields.phone.placeholder}
+      />
+    </div>
+
+    <div class="contact-form__field contact-form__field--full">
+      <label for={fieldId("service")}>
+        {formText.fields.service.label}
+      </label>
+
+      <select id={fieldId("service")} name="service" required>
+        <option value="" selected disabled>
+          {formText.fields.service.placeholder}
+        </option>
+
+        {formText.fields.service.options.map((option) => (
+          <option value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </div>
+
+    <div class="contact-form__field contact-form__field--full">
+      <label for={fieldId("message")}>
+        {formText.fields.message.label}
+      </label>
+
+      <textarea
+        id={fieldId("message")}
+        name="message"
+        rows="5"
+        placeholder={formText.fields.message.placeholder}
+        required
+      ></textarea>
+    </div>
+  </div>
+
+  <div class="contact-form__footer">
+    <Button variant="primary" type="submit" dataContactSubmit={true}>
+      {formText.submit}
+    </Button>
+
+
+
+    <p class="contact-form__note">
+      {formText.urgentNote}
+    </p>
+  </div>
+
+  <p class="contact-form__status" data-contact-status aria-live="polite"></p>
+</form>

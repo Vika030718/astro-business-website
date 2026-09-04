@@ -1,0 +1,62 @@
+---
+import Button from "../common/Button.astro";
+import FaqAccordion from "../common/FaqAccordion.astro";
+
+import { siteContent } from "../../i18n/siteContent";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+type Lang = keyof typeof siteContent;
+const { lang = "en" } = Astro.props as { lang?: Lang };
+const prefix = lang === "fr" ? "/fr" : "";
+
+const pageText = siteContent[lang].faqPage;
+---
+<BaseLayout
+  lang={lang}
+  title={pageText.seo.title}
+  description={pageText.seo.description}
+  routeKey="faq"
+>
+
+  <section class="faq-page">
+    <div class="container">
+      <div class="faq-page__hero">
+        <p class="eyebrow">{pageText.hero.eyebrow}</p>
+
+        <h1 class="main-title">
+          {pageText.hero.title}
+        </h1>
+
+        <p class="faq-page__hero-text">
+          {pageText.hero.text}
+        </p>
+      </div>
+
+
+
+      <FaqAccordion items={pageText.items} />
+
+      <div class="faq-page__cta">
+        <div>
+          <p class="eyebrow">{pageText.cta.eyebrow}</p>
+
+          <h2 class="faq-page__cta-title">
+            {pageText.cta.title}
+          </h2>
+
+          <p class="faq-page__cta-text">
+            {pageText.cta.text}
+          </p>
+        </div>
+
+        <Button variant="primary" contactModal={true}>
+          {pageText.cta.button} <svg class="button__arrow" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 12h14" />
+      <path d="m13 6 6 6-6 6" />
+    </svg>
+        </Button>
+      </div>
+    </div>
+  </section>
+
+
+</BaseLayout>

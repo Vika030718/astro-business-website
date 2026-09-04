@@ -1,0 +1,176 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionContactCta from "../components/common/SectionContactCta.astro";
+
+const title = "Privacy Policy";
+const description =
+  "Learn how BusinessCompany collects, uses, protects, and handles information submitted through our website and business communications.";
+---
+
+<BaseLayout
+  lang="en"
+  title={title}
+  description={description}
+  canonicalPath={Astro.url.pathname}
+  noFrenchAlternate={true}
+  disabledLanguages={["fr"]}
+>
+  <article class="blog-post">
+    <div class="container">
+      <a class="blog-post__back" href="/">Back to home</a>
+
+      <header class="blog-post__header">
+        <div class="blog-post__meta">
+          <span>Privacy Policy</span>
+          <span>Last updated: July 2026</span>
+        </div>
+
+        <h1 class="blog-post__title">Privacy Policy</h1>
+
+        <p class="blog-post__description">
+          BusinessCompany Solutions Inc. respects your privacy. This policy explains how we collect,
+          use, protect, and handle information submitted through our website and business
+          communications.
+        </p>
+      </header>
+
+      <div class="blog-post__content">
+        <h2>1. Information we collect</h2>
+        <p>
+          We may collect personal and business information that you voluntarily provide when
+          you contact us, submit a website form, request support, book a consultation, or
+          communicate with our team.
+        </p>
+
+        <p>This may include:</p>
+
+        <ul>
+          <li>Your name, company name, and job title.</li>
+          <li>Email address, phone number, and business address.</li>
+          <li>Information submitted through contact forms.</li>
+          <li>Details about your IT environment, service needs, or support request.</li>
+          <li>Communication history with our team.</li>
+        </ul>
+
+        <h2>2. Website information</h2>
+        <p>
+          When you visit our website, we may collect limited technical information such as
+          browser type, device information, IP address, pages visited, referring pages, and
+          general website usage information.
+        </p>
+
+        <p>
+          This information helps us understand how visitors use our website, improve site
+          performance, and maintain website security.
+        </p>
+
+        <h2>3. How we use information</h2>
+        <p>We may use collected information to:</p>
+
+        <ul>
+          <li>Respond to enquiries, contact requests, and support requests.</li>
+          <li>Provide information about our managed IT, cybersecurity, cloud, backup, and infrastructure services.</li>
+          <li>Assess your business technology needs.</li>
+          <li>Schedule consultations or follow-ups.</li>
+          <li>Deliver and improve our services.</li>
+          <li>Maintain website security and performance.</li>
+          <li>Meet legal, administrative, or business requirements.</li>
+        </ul>
+
+        <h2>4. Consent</h2>
+        <p>
+          By submitting information through our website or communicating with BusinessCompany, you
+          consent to the collection and use of your information for the purposes described
+          in this policy.
+        </p>
+
+        <p>
+          You may contact us to withdraw consent where permitted by law, subject to any
+          legal, contractual, or service-related requirements.
+        </p>
+
+        <h2>5. Cookies and analytics</h2>
+        <p>
+          Our website may use cookies or similar technologies to support website
+          functionality, understand website traffic, improve user experience, and maintain
+          site performance.
+        </p>
+
+        <p>
+          You can adjust your browser settings to block or delete cookies. Some website
+          features may not function properly if cookies are disabled.
+        </p>
+
+        <h2>6. Sharing information</h2>
+        <p>
+          We do not sell personal information. We may share information only when required
+          for legitimate business, service, or legal purposes.
+        </p>
+
+        <p>This may include sharing information with:</p>
+
+        <ul>
+          <li>Technology, hosting, email, security, or business service providers.</li>
+          <li>Vendors or partners involved in delivering requested services.</li>
+          <li>Professional advisors such as legal, accounting, or compliance providers.</li>
+          <li>Authorities or third parties where required by law or necessary to protect rights and security.</li>
+        </ul>
+
+        <h2>7. How we protect information</h2>
+        <p>
+          We use reasonable administrative, technical, and organizational safeguards to help
+          protect information from unauthorized access, loss, misuse, disclosure, or
+          alteration.
+        </p>
+
+        <p>
+          No website, email system, or online service can be guaranteed to be completely
+          secure. Please avoid submitting highly sensitive information through general
+          website forms.
+        </p>
+
+        <h2>8. Retention</h2>
+        <p>
+          We retain information only as long as reasonably necessary for the purposes
+          described in this policy, to provide services, maintain business records, resolve
+          issues, or meet legal and administrative requirements.
+        </p>
+
+        <h2>9. Access and correction</h2>
+        <p>
+          You may contact us to request access to personal information we hold about you or
+          to request that inaccurate information be corrected, subject to legal and business
+          requirements.
+        </p>
+
+        <h2>10. Third-party websites</h2>
+        <p>
+          Our website may contain links to third-party websites or services. We are not
+          responsible for the privacy practices, content, or security of third-party
+          websites.
+        </p>
+
+        <h2>11. Updates to this policy</h2>
+        <p>
+          We may update this Privacy Policy from time to time. The updated version will be
+          posted on this page with a revised “Last updated” date.
+        </p>
+
+        <h2>12. Contact us</h2>
+        <p>
+          For questions about this Privacy Policy or how your information is handled,
+          contact BusinessCompany Solutions Inc.
+        </p>
+
+        <p>
+          <strong>BusinessCompany Solutions Inc.</strong><br />
+          Company Address, Cambridge, ON N3H 4R7<br />
+          Email: <a href="mailto:hello@BusinessCompany.ca">hello@BusinessCompany.ca</a><br />
+          Phone: <a href="tel:5192676767">111-111-1111</a>
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <SectionContactCta />
+</BaseLayout>

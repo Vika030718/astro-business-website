@@ -1,0 +1,346 @@
+---
+import { siteContent } from "../../i18n/siteContent";
+type Lang = keyof typeof siteContent;
+const { lang = "en" } = Astro.props as { lang?: Lang };
+const prefix = lang === "fr" ? "/fr" : "";
+const homePageText = siteContent[lang].homePage;
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Button from "../../components/common/Button.astro";
+import ServiceCard from "../../components/common/ServiceCard.astro";
+import WhoWeHelpCard from "../../components/common/WhoWeHelpCard.astro";
+import TechnologyExpertise from "../../components/common/TechnologyExpertise.astro";
+import AboutBadge from "../../components/common/AboutBadge.astro";
+import TestimonialCard from "../../components/common/TestimonialCard.astro";
+import CertificationCard from "../../components/common/CertificationCard.astro";
+import SectionContactCta from "../../components/common/SectionContactCta.astro";
+
+
+import { Image } from "astro:assets";
+
+import heroImage from "../../assets/images/hero/hero.png";
+import expertImage from "../../assets/images/team/it-expert.png";
+import aboutImage from "../../assets/images/team/BusinessCompany-team.png";
+
+import managedItServicesIcon from "../../assets/images/icons/managed-it-services.svg";
+import cybersecurityServicesIcon from "../../assets/images/icons/cybersecurity-services.svg";
+import cloudMicrosoft365Icon from "../../assets/images/icons/cloud-microsoft-365.svg";
+import backupDisasterRecoveryIcon from "../../assets/images/icons/backup-disaster-recovery.svg";
+import networkInfrastructureIcon from "../../assets/images/icons/network-infrastructure.svg";
+import coManagedItConsultingIcon from "../../assets/images/icons/co-managed-it-consulting.svg";
+import ccnaLogo from "../../assets/images/certifications/ccna.jpg";
+import pmpLogo from "../../assets/images/certifications/pmp.jpg";
+import comptiaLogo from "../../assets/images/certifications/comptia-a-plus.jpg";
+import cehLogo from "../../assets/images/certifications/ceh.jpg";
+import cisspLogo from "../../assets/images/certifications/cissp.jpg";
+import LocationFeature from "../../components/common/LocationFeature.astro";
+import canadaMap from "../../assets/images/map/canada-service-map.svg";
+
+const certificationImages = {
+  ccna: ccnaLogo,
+  pmp: pmpLogo,
+  comptia: comptiaLogo,
+  ceh: cehLogo,
+  cissp: cisspLogo,
+};
+
+const serviceIcons = [
+  managedItServicesIcon,
+  cybersecurityServicesIcon,
+  cloudMicrosoft365Icon,
+  backupDisasterRecoveryIcon,
+  networkInfrastructureIcon,
+  coManagedItConsultingIcon,
+];
+---
+
+<BaseLayout
+  lang={lang}
+  title={homePageText.seo.title}
+  description={homePageText.seo.description}
+  routeKey="home"
+>
+  <section class="home-hero">
+    <div class="container home-hero__container">
+      <div class="home-hero__content">
+        <p class="eyebrow">{homePageText.hero.eyebrow}</p>
+
+        <h1 class="home-hero__title">{homePageText.hero.title}</h1>
+
+        <p class="home-hero__text">{homePageText.hero.text}</p>
+
+        <div class="home-hero__actions">
+          <Button variant="primary" contactModal={true}>
+            {homePageText.hero.primaryButton} 
+          </Button>
+
+          <Button href={`${prefix}/comprehensive-it-support-services/`} variant="secondary">
+            {homePageText.hero.secondaryButton}  
+            <svg class="button__arrow" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </Button>
+        </div>
+      </div>
+    </div>
+
+    <Image
+      class="home-hero__image"
+      src={heroImage}
+      alt={homePageText.hero.imageAlt}
+      width={900}
+      height={650}
+      loading="eager"
+      fetchpriority="high"
+    />
+    <a
+    class="home-hero__expert-card"
+    href="tel:5192676767"
+    aria-label="Call BusinessCompany at 111-111-1111"
+  >
+    <Image
+      class="home-hero__expert-image"
+      src={expertImage}
+      alt={homePageText.hero.expertImageAlt}
+      width={64}
+      height={64}
+      loading="eager"
+    />
+  
+    <div class="home-hero__expert-content">
+      <span>{homePageText.hero.expertTextTop}</span>
+      <strong>{homePageText.hero.expertTextBottom}</strong>
+    </div>
+  
+    <span class="home-hero__expert-arrow">
+      <svg class="button__arrow" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 12h14" />
+        <path d="m13 6 6 6-6 6" />
+      </svg>
+    </span>
+  </a>
+  </section>
+
+  <section>
+    <div class="container home-hero__trust">
+      {
+        homePageText.trustBar.map((item) => (
+          <div class="home-hero__trust-item">
+            <span class="home-hero__trust-icon">✓</span>
+            <span>{item}</span>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="home-services">
+    <div class="container home-services__container">
+      <div class="home-services__header">
+        <div class="home-services__header-top">
+          <p class="eyebrow">{homePageText.services.eyebrow}</p>
+
+          <a class="link" href={homePageText.services.allServicesHref}>
+            {homePageText.services.allServicesLabel}  
+            <svg class="button__arrow" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </a>
+        </div>
+        
+        <div>
+          <h2 class="main-title" >
+            {homePageText.services.title}
+          </h2>
+
+          <p class="home-services__text">
+            {homePageText.services.text}
+          </p>
+        </div>      
+      </div>
+
+      <div class="home-services__grid">
+        {
+          homePageText.services.items.map((service, index) => (
+            <ServiceCard service={service} icon={serviceIcons[index]} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="home-who">
+    <div class="container home-who__container">
+      <div class="home-who__content">
+        <p class="eyebrow">{homePageText.whoWeHelp.eyebrow}</p>
+
+        <h2 class="main-title">{homePageText.whoWeHelp.title}</h2>
+
+        <p class="home-who__text">{homePageText.whoWeHelp.text}</p>
+
+        <h3 class="main-title">{homePageText.whoWeHelp.subtitle}</h3>
+
+        <p class="home-who__description">{homePageText.whoWeHelp.description}</p>
+
+        <Button href={homePageText.whoWeHelp.buttonHref} variant="primary">
+          {homePageText.whoWeHelp.buttonLabel}  
+          <svg class="button__arrow" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14" />
+            <path d="m13 6 6 6-6 6" />
+          </svg>
+        </Button>
+      </div>
+
+      <div class="home-who__cards">
+        {homePageText.whoWeHelp.items.map((item) => <WhoWeHelpCard item={item} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="home-about">
+    <div class="container home-about__container">
+      <div class="home-about__content">
+        <p class="eyebrow">{homePageText.aboutPreview.eyebrow}</p>
+
+        <h2 class="main-title">{homePageText.aboutPreview.title}</h2>
+
+        <p class="home-about__text">{homePageText.aboutPreview.text}</p>
+
+        <div class="home-about__badges">
+          {homePageText.aboutPreview.badges.map((item) => <AboutBadge item={item} />)}
+        </div>
+
+        <a class="link home-about__link " href={homePageText.aboutPreview.linkHref}>
+          {homePageText.aboutPreview.linkLabel} 
+          <svg class="button__arrow" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14" />
+            <path d="m13 6 6 6-6 6" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="home-about__visual">
+        <Image
+          class="home-about__image"
+          src={aboutImage}
+          alt={homePageText.aboutPreview.imageAlt}
+          width={760}
+          height={520}
+          loading="lazy"
+        />
+
+        <div class="home-about__floating home-about__floating--right">
+          <AboutBadge
+            item={homePageText.aboutPreview.floatingBadges[1]}
+            variant="floating"
+          />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="home-certifications">
+    <div class="container">
+
+        <div class="home-certifications__icon">
+          <span>✓</span>
+        </div>
+
+        <p class="eyebrow">
+          {homePageText.certifications.eyebrow}
+        </p>
+
+        <h2 class="main-title">
+          {homePageText.certifications.title}
+        </h2>
+
+        <p class="home-certifications__text">
+          {homePageText.certifications.text}
+        </p>
+
+        <div class="home-certifications__grid">
+          {
+            homePageText.certifications.items.map((item) => (
+              <CertificationCard
+                item={item}
+                image={certificationImages[item.imageKey]}
+              />
+            ))
+          }
+        </div>
+      </div>
+
+  </section>
+
+  <TechnologyExpertise
+    eyebrow={homePageText.technologyExpertise.eyebrow}
+    title={homePageText.technologyExpertise.title}
+    text={homePageText.technologyExpertise.text}
+    secondaryText={homePageText.technologyExpertise.secondaryText}
+    technologies={homePageText.technologyExpertise.technologies}
+  />
+
+  <section class="home-testimonials">
+    <div class="container home-testimonials__container">
+      <div class="home-testimonials__header">
+        <p class="eyebrow">
+          {homePageText.testimonials.eyebrow}
+        </p>
+
+        <h2 class="main-title">
+          {homePageText.testimonials.title}
+        </h2>
+
+        <p class="home-testimonials__text">
+          {homePageText.testimonials.text}
+        </p>
+      </div>
+
+      <div class="home-testimonials__grid">
+        {homePageText.testimonials.items.map((item) => <TestimonialCard item={item} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="home-locations">
+    <div class="container home-locations__container">
+      <div class="home-locations__content">
+        <p class="eyebrow">
+          {homePageText.locations.eyebrow}
+        </p>
+
+        <h2 class="main-title">
+          {homePageText.locations.title}
+        </h2>
+
+        <p class="home-locations__text">
+          {homePageText.locations.text}
+        </p>
+
+        <div class="home-locations__features">
+          {
+            homePageText.locations.features.map((item) => (
+              <LocationFeature item={item} />
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="home-locations__map-wrap">
+        <Image
+          class="home-locations__map"
+          src={canadaMap}
+          alt={homePageText.locations.mapAlt}
+          width={900}
+          height={620}
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <SectionContactCta lang={lang}/>
+</BaseLayout>

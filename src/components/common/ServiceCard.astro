@@ -1,0 +1,21 @@
+---
+const { service, icon } = Astro.props;
+---
+
+<a class="service-card" href={service.href} aria-label={service.title}>
+  <div class="service-card__icon" aria-hidden="true">
+    <img class="service-card__icon-img" src={icon.src} alt="" />
+  </div>
+
+  <h3 class="service-card__title">{service.title}</h3>
+
+  <p class="service-card__text">{service.text}</p>
+
+  <span class="link">
+    {service.linkLabel}          
+     <svg class="button__arrow" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 12h14" />
+      <path d="m13 6 6 6-6 6" />
+    </svg>
+  </span>
+</a>

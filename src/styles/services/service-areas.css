@@ -1,0 +1,119 @@
+.service-areas {
+  padding: clamp(72px, 8vw, 112px) 0;
+}
+
+.service-areas__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 520px);
+  gap: 30px;
+  align-items: start;
+  border-radius: var(--radius-lg);
+}
+
+.service-areas__content {
+  max-width: 680px;
+}
+
+.service-areas__text {
+  max-width: 640px;
+  margin: 28px 0 0;
+  color: var(--color-muted);
+  font-size: 1.08rem;
+  line-height: 1.85;
+}
+
+.service-areas__list {
+  display: grid;
+  border-left: 1px solid var(--color-border);
+  padding-left: 30px;
+}
+
+.service-areas__item {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  padding: 0 0 32px;
+}
+
+.service-areas__item + .service-areas__item {
+  padding-top: 32px;
+  border-top: 1px solid var(--color-border);
+}
+
+.service-areas__item:last-child {
+  padding-bottom: 0;
+}
+
+.service-areas__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 999px;
+  color: var(--color-primary-dark);
+  background: var(--color-primary-faint);
+}
+
+.service-areas__icon svg {
+  width: 32px;
+  height: 32px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.service-areas__item-title {
+  margin: 0;
+  color: var(--color-navy);
+  font-size: 1.22rem;
+  line-height: 1.25;
+}
+
+.service-areas__item-text {
+  margin: 10px 0 0;
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 992px) {
+  .service-areas__inner {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .service-areas__list {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .service-areas {
+    padding: 56px 0;
+  }
+
+  .service-areas__item {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 18px;
+    padding-bottom: 26px;
+  }
+
+  .service-areas__item + .service-areas__item {
+    padding-top: 26px;
+  }
+
+  .service-areas__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .service-areas__icon svg {
+    width: 26px;
+    height: 26px;
+  }
+}

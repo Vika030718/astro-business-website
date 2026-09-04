@@ -1,0 +1,128 @@
+---
+import { siteContent } from "../../i18n/siteContent";
+type Lang = keyof typeof siteContent;
+const { lang = "en" } = Astro.props as { lang?: Lang };
+const prefix = lang === "fr" ? "/fr" : "";
+const pageText = siteContent[lang].servicesOverviewPage;
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Button from "./../common/Button.astro";
+import ServicesEcosystem from "../common/ServicesEcosystem.astro";
+
+import heroImg from "./../../assets/images/services/co-Managed-It-Consulting-Page.jpg";
+import ctaImage from "./../../assets/images/Business-IT-services.png";
+
+import { Image } from "astro:assets";
+---
+
+<BaseLayout 
+  lang={lang} 
+  title={pageText.seo.title} 
+  description={pageText.seo.description} 
+  routeKey="servicesOverview"
+>
+      <section class="service-hero-bg">
+        <Image
+          class="service-hero-bg__image"
+          src={heroImg}
+          alt=""
+          loading="eager"
+          fetchpriority="high"
+          
+        />
+      
+        <div class="service-hero-bg__overlay"></div>
+      
+        <div class="container">
+          <div class="service-hero-bg__content">
+            <p class="eyebrow">{pageText.hero.eyebrow}</p>
+      
+            <h1 class="main-title">
+              {pageText.hero.title}
+            </h1>
+      
+            <p class="service-hero-bg__text">
+              {pageText.hero.text}
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+        <ServicesEcosystem
+          eyebrow={pageText.intro.eyebrow}
+          title={pageText.intro.title}
+          text={pageText.intro.text}
+        />
+
+        
+      
+        <section class="services-overview-list">
+          <div class="container">
+            <div class="services-overview-list__head">
+              <p class="eyebrow">{pageText.servicesEyebrow.eyebrow}</p>
+            </div>
+        
+            <div class="services-overview-list__items">
+              {pageText.services.map((service, index) => (
+                <article class="services-overview-list__item">
+                  <a class="services-overview-list__link" href={service.href}>
+                    <span class="services-overview-list__number">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+        
+                    <span class="services-overview-list__line" aria-hidden="true"></span>
+        
+                    <span class="services-overview-list__title">
+                      {service.title}
+                    </span>
+        
+                    <span class="services-overview-list__text">
+                      {service.text}
+                    </span>
+        
+                    <span class="services-overview-list__arrow" aria-hidden="true">
+                      
+→
+                    </span>
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="services-cta-banner">
+          <Image
+                class="services-cta-banner-img"
+                src={ctaImage}
+                alt=""
+                loading="eager"
+                fetchpriority="high"
+              />
+              <div class="services-cta-banner__overlay"></div>
+          <div class="container">
+            <div class="services-cta-banner__inner">
+              <div class="services-cta-banner__content">
+                <p class="eyebrow">{pageText.cta.eyebrow}</p>
+        
+                <h2 class="title-main">
+                  {pageText.cta.title}
+                </h2>
+        
+                <p class="services-cta-banner__text">
+                  {pageText.cta.text}
+                </p>
+        
+                <Button variant="primary" contactModal={true}>
+                  {pageText.cta.button} <svg class="button__arrow" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 12h14" />
+      <path d="m13 6 6 6-6 6" />
+    </svg>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+</BaseLayout>

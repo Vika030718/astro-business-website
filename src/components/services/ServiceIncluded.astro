@@ -1,0 +1,49 @@
+---
+import servicesImg from "./../../assets/images/services/services-list.png";
+
+const {
+  eyebrow = "What’s Included",
+  title = "Everything your business needs to stay productive",
+  items = [],
+} = Astro.props;
+
+const middle = Math.ceil(items.length / 2);
+const columns = [items.slice(0, middle), items.slice(middle)];
+---
+
+<section class="service-included" id="included">
+  <div class="service-included__content">
+    <p class="eyebrow">{eyebrow}</p>
+
+    <h2 class="main-title">
+      {title}
+    </h2>
+
+    <div class="service-included__grid">
+      {columns.map((column) => (
+        <ul class="service-included__list">
+          {column.map((item) => (
+            <li class="service-included__item">
+              <span class="service-included__check" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="8.5" />
+                  <path d="m8.5 12 2.4 2.4 4.8-5" />
+                </svg>
+              </span>
+
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  </div>
+
+  <div class="service-included__visual" aria-hidden="true">
+    <img
+      src={servicesImg.src}
+      alt=""
+      loading="lazy"
+    />
+  </div>
+</section>

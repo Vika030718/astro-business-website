@@ -1,0 +1,46 @@
+---
+import { siteContent } from "../../i18n/siteContent";
+const { lang = "en", disabledLanguages = [] } = Astro.props;
+const sectionText = siteContent[lang].header;
+
+import Menu from "../layout/Menu.astro";
+import Button from "../../components/common/Button.astro";
+import LanguageSwitcher from "../common/LanguageSwitcher.astro";
+
+import logo from "../../assets/images/logo.png";
+
+import { Image } from "astro:assets";
+
+---
+
+<header class="site-header" lang={lang}>
+  <div class="container site-header__inner">
+    <a class="site-header__logo" href={lang === "fr" ? "/fr/" : "/"}>
+      <Image
+        class="site-header__logo-image"
+        src={logo}
+        alt={sectionText.logo}
+        width={220}
+        height={80}
+        loading="eager"
+      />
+    </a>
+
+    <nav class="site-header__nav" aria-label="Main navigation">
+      <Menu lang={lang} />
+    </nav>
+
+    <div class="site-header__actions">
+      <Button
+        contactModal={true}
+        variant="primary"
+      >
+        {sectionText.primaryButton}
+      </Button>
+
+      <LanguageSwitcher 
+        disabledLanguages={disabledLanguages} 
+      />
+    </div>
+  </div>
+</header>

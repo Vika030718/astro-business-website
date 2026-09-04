@@ -1,0 +1,41 @@
+---
+const {
+  eyebrow,
+  title,
+  text,
+  columns,
+  rows = [],
+} = Astro.props;
+---
+
+<section class="service-comparison" id="comparison">
+  <p class="eyebrow">{eyebrow}</p>
+
+  <h2 class="main-title">{title}</h2>
+
+  <p class="service-comparison__description">
+    {text}
+  </p>
+
+  <div class="service-comparison__table-wrap">
+    <table class="service-comparison__table">
+      <thead>
+        <tr>
+          <th class="service-comparison__empty" scope="col"></th>
+          <th scope="col">{columns.managed}</th>
+          <th scope="col">{columns.reactive}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {rows.map((row) => (
+          <tr>
+            <th scope="row">{row.label}</th>
+            <td>{row.managed}</td>
+            <td>{row.reactive}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>

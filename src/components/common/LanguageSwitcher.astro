@@ -1,0 +1,56 @@
+---
+type Lang = "en" | "fr";
+
+interface Props {
+  disabledLanguages?: Lang[];
+}
+
+const { disabledLanguages = [] } = Astro.props;
+
+const pathname = Astro.url.pathname;
+
+const isFr = pathname === "/fr" || pathname.startsWith("/fr/");
+
+const enPath = isFr ? pathname.replace(/^\/fr/, "") || "/" : pathname;
+
+const frPath = isFr ? pathname : pathname === "/" ? "/fr/" : `/fr${pathname}`;
+
+const isEnDisabled = disabledLanguages.includes("en");
+const isFrDisabled = disabledLanguages.includes("fr");
+---
+
+<div class="language-switcher" aria-label="Language switcher">
+  {isEnDisabled ? (
+    <span
+      class={`language-switcher__link language-switcher__link--disabled ${!isFr ? "language-switcher__link--active" : ""}`}
+      aria-disabled="true"
+    >
+      EN
+    </span>
+  ) : (
+    <a
+      class={`language-switcher__link ${!isFr ? "language-switcher__link--active" : ""}`}
+      href={enPath}
+    >
+      EN
+    </a>
+  )}
+
+  <span class="language-switcher__divider">/</span>
+
+  {isFrDisabled ? (
+    <span
+      class={`language-switcher__link language-switcher__link--disabled ${isFr ? "language-switcher__link--active" : ""}`}
+      aria-disabled="true"
+    >
+      FR
+    </span>
+  ) : (
+    <a
+      class={`language-switcher__link ${isFr ? "language-switcher__link--active" : ""}`}
+      href={frPath}
+    >
+      FR
+    </a>
+  )}
+</div>

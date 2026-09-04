@@ -1,0 +1,57 @@
+---
+const {
+  image,
+  topBadge,
+  bottomBadge,
+  alt = "",
+} = Astro.props;
+---
+
+<div class="service-hero-visual">
+  <div class="service-hero-visual__shape"></div>
+
+  <div class="service-hero-visual__image-wrap">
+    <img
+      src={image.src}
+      alt={alt}
+      class="service-hero-visual__image"
+      
+    />
+
+    <div class="service-hero-visual__fade"></div>
+
+    {topBadge && (
+      <div class="service-hero-visual__badge service-hero-visual__badge--top">
+        <span class="service-hero-visual__badge-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 6v6l4 2" />
+          </svg>
+        </span>
+
+        <span>
+          <strong>{topBadge.value}</strong>
+          <small>{topBadge.label}</small>
+        </span>
+      </div>
+    )}
+
+    {bottomBadge && (
+      <div class="service-hero-visual__badge service-hero-visual__badge--bottom">
+        <span class="service-hero-visual__badge-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48">
+            <path d="M18 23a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z"></path>
+            <path d="M34 24a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"></path>
+            <path d="M6 40c1.5-8 6-12 12-12s10.5 4 12 12"></path>
+            <path d="M26 32c2-2.5 4.5-3.5 8-3.5 5 0 8 3.5 9 10.5"></path>
+          </svg>
+        </span>
+
+        <span>
+          <strong>{bottomBadge.value}</strong>
+          <small>{bottomBadge.label}</small>
+        </span>
+      </div>
+    )}
+  </div>
+</div>

@@ -1,0 +1,138 @@
+---
+import { siteContent } from "../../i18n/siteContent";
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContactForm from "../../components/common/Form.astro";
+
+import heroImg from "../../assets/images/team/camo-office.png";
+
+type Lang = keyof typeof siteContent;
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const pageText = siteContent[lang].contactUsPage;
+---
+
+<BaseLayout
+  lang={lang}
+  title={pageText.seo.title}
+  description={pageText.seo.description}
+  routeKey="contact"
+>
+  <div>
+    <section class="contact-page">
+      <section class="contact-page__hero">
+        <img
+          class="contact-page__hero-image"
+          src={heroImg.src}
+          alt=""
+        />
+
+        <div class="contact-page__hero-bg">
+          <div class="contact-page__hero-overlay"></div>
+        </div>
+
+        <div class="container">
+          <div class="contact-page__hero-grid">
+            <div class="contact-page__hero-content">
+              <p class="eyebrow">{pageText.hero.eyebrow}</p>
+
+              <h1 class="main-title">
+                {pageText.hero.title}
+              </h1>
+
+              <p class="contact-page__intro">
+                {pageText.hero.text}
+              </p>
+
+              <div class="contact-page__details">
+                <div class="contact-page__detail">
+                  <div class="contact-page__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 7v5l3 2" />
+                      <circle cx="12" cy="12" r="9" />
+                    </svg>
+                  </div>
+
+                  <div class="contact-page__detail-content">
+                    <span class="contact-page__label">
+                      {pageText.details.regularHours.label}
+                    </span>
+
+                    <span>
+                      {pageText.details.regularHours.time}
+                    </span>
+
+                    <a href={pageText.details.regularHours.phoneHref}>
+                      {pageText.details.regularHours.phone}
+                    </a>
+                  </div>
+                </div>
+
+                <div class="contact-page__detail">
+                  <div class="contact-page__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M4 12a8 8 0 0 1 16 0" />
+                      <path d="M5 12v4a2 2 0 0 0 2 2h1v-6H7a2 2 0 0 0-2 2Z" />
+                      <path d="M19 12v4a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2Z" />
+                    </svg>
+                  </div>
+
+                  <div class="contact-page__detail-content">
+                    <span class="contact-page__label">
+                      {pageText.details.afterHours.label}
+                    </span>
+
+                    <span>
+                      {pageText.details.afterHours.time}
+                    </span>
+
+                    <a href={pageText.details.afterHours.phoneHref}>
+                      {pageText.details.afterHours.phone}
+                    </a>
+                  </div>
+                </div>
+
+                <div class="contact-page__detail">
+                  <div class="contact-page__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12Z" />
+                      <circle cx="12" cy="9" r="2.5" />
+                    </svg>
+                  </div>
+
+                  <div class="contact-page__detail-content">
+                    <span class="contact-page__label">
+                      {pageText.details.office.label}
+                    </span>
+
+                    <span>{pageText.details.office.addressLine1}</span>
+                    <span>{pageText.details.office.addressLine2}</span>
+
+                    <a
+                      class="contact-page__map-link link"
+                      href={pageText.details.office.mapHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {pageText.details.office.directions} <svg class="button__arrow" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 12h14" />
+      <path d="m13 6 6 6-6 6" />
+    </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-page__form-wrap">
+              <div class="contact-page__form">
+                <ContactForm lang={lang} idPrefix="page-contact" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </div>
+</BaseLayout>

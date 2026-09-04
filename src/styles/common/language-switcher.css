@@ -1,0 +1,27 @@
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.language-switcher__link {
+  color: var(--color-muted);
+}
+
+.language-switcher__link--active {
+  color: var(--color-primary);
+}
+
+.language-switcher__divider {
+  color: var(--color-border);
+}
+
+.language-switcher__link--disabled {
+  color: var(--color-text-muted);
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+  text-decoration: none;
+}

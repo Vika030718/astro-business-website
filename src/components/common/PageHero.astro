@@ -1,0 +1,47 @@
+---
+const {
+  eyebrow,
+  title,
+  text,
+  image,
+  imageAlt = "",
+  buttonText,
+  buttonHref,
+} = Astro.props;
+
+import Button from "../../components/common/Button.astro";
+
+const hasMediaSlot = Astro.slots.has("media");
+const hasVisual = hasMediaSlot || image;
+---
+
+<section class:list={["page-hero", { "page-hero--has-visual": hasVisual }]}>
+  <div class="container page-hero__inner">
+    <div class="page-hero__content">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+
+      <h1 class="page-hero__title">{title}</h1>
+
+      {text && <p class="page-hero__text">{text}</p>}
+
+      {buttonText && buttonHref && (
+        <Button href={buttonHref} variant="primary">
+          {buttonText} <svg class="button__arrow" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 12h14" />
+      <path d="m13 6 6 6-6 6" />
+    </svg>
+        </Button>
+      )}
+    </div>
+
+    {hasVisual && (
+      <div class="page-hero__media">
+        {hasMediaSlot ? (
+          <slot name="media" />
+        ) : (
+          <img class="page-hero__image" src={image.src} alt={imageAlt} />
+        )}
+      </div>
+    )}
+  </div>
+</section>

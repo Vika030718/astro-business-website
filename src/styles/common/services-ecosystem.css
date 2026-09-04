@@ -1,0 +1,251 @@
+.services-ecosystem {
+  position: relative;
+  overflow: hidden;
+  padding: 50px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.services-ecosystem__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(420px, 1fr);
+  gap: 88px;
+  align-items: center;
+}
+
+.services-ecosystem__content {
+  max-width: 560px;
+}
+
+.services-ecosystem__title {
+  margin: 0;
+  color: var(--color-heading);
+  font-size: clamp(2.3rem, 4vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.06em;
+}
+
+.services-ecosystem__text {
+  max-width: 520px;
+  margin: 26px 0 0;
+  color: var(--color-muted);
+  font-size: 1.06rem;
+  line-height: 1.85;
+}
+
+.services-ecosystem__visual {
+  position: relative;
+  width: min(100%, 460px);
+  aspect-ratio: 1 / 1;
+  margin-left: auto;
+}
+
+.services-ecosystem__visual::after {
+  content: "";
+  position: absolute;
+  right: 50%;
+  margin-right: -210px;
+  top: 50%;
+  width: 420px;
+  height: 420px;
+  border-radius: 999px;
+  background: rgba(161, 205, 66, 0.08);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.services-ecosystem__rings {
+  position: absolute;
+  inset: 7%;
+  border: 1px solid rgba(161, 205, 66, 0.26);
+  border-radius: 999px;
+}
+
+.services-ecosystem__rings::before,
+.services-ecosystem__rings::after {
+  content: "";
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.services-ecosystem__rings::before {
+  inset: 12%;
+  border: 1px dashed rgba(161, 205, 66, 0.4);
+}
+
+.services-ecosystem__rings::after {
+  inset: -12%;
+  border: 1px solid rgba(161, 205, 66, 0.12);
+}
+
+.services-ecosystem__center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--color-heading);
+  text-align: center;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 22px 70px rgba(12, 18, 32, 0.08);
+}
+
+.services-ecosystem__center span {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.services-ecosystem__center strong {
+  display: block;
+  font-size: 1.45rem;
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.services-ecosystem__node {
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  width: 150px;
+  color: var(--color-heading);
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.services-ecosystem__node--top {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.services-ecosystem__node--rightTop {
+  top: 23%;
+  right: 0;
+}
+
+.services-ecosystem__node--rightBottom {
+  right: 0;
+  bottom: 23%;
+}
+
+.services-ecosystem__node--bottom {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.services-ecosystem__node--leftBottom {
+  left: 0;
+  bottom: 23%;
+}
+
+.services-ecosystem__node--leftTop {
+  top: 23%;
+  left: 0;
+}
+
+.services-ecosystem__icon {
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  border: 1px solid rgba(161, 205, 66, 0.26);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-primary-dark);
+  box-shadow: 0 14px 44px rgba(12, 18, 32, 0.07);
+}
+
+.services-ecosystem__icon svg {
+  width: 32px;
+  height: 32px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 992px) {
+  .services-ecosystem {
+    padding: 72px 0;
+  }
+
+  .services-ecosystem__grid {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+  .services-ecosystem__content {
+    max-width: 720px;
+  }
+
+  .services-ecosystem__text {
+    max-width: 680px;
+  }
+
+  .services-ecosystem__visual {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-ecosystem {
+    padding: 56px 0;
+  }
+
+  .services-ecosystem__grid {
+    gap: 42px;
+  }
+
+  .services-ecosystem__visual {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .services-ecosystem__center {
+    width: 112px;
+    height: 112px;
+  }
+
+  .services-ecosystem__center span {
+    font-size: 0.9rem;
+  }
+
+  .services-ecosystem__center strong {
+    margin-top: -20px;
+    font-size: 1.1rem;
+  }
+
+  .services-ecosystem__node {
+    width: 112px;
+    gap: 7px;
+    font-size: 0.72rem;
+  }
+
+  .services-ecosystem__icon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .services-ecosystem__icon svg {
+    width: 25px;
+    height: 25px;
+  }
+}

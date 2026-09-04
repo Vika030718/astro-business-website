@@ -1,0 +1,75 @@
+---
+const {
+  eyebrow,
+  title,
+  text,
+  areas = [],
+} = Astro.props;
+
+const icons = {
+  pin: `
+    <svg viewBox="0 0 24 24">
+      <path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12Z" />
+      <circle cx="12" cy="9" r="2.5" />
+    </svg>
+  `,
+  building: `
+    <svg viewBox="0 0 24 24">
+      <path d="M4 21h16" />
+      <path d="M6 21V8h6v13" />
+      <path d="M12 21V4h6v17" />
+      <path d="M8 11h2" />
+      <path d="M8 15h2" />
+      <path d="M14 8h2" />
+      <path d="M14 12h2" />
+      <path d="M14 16h2" />
+    </svg>
+  `,
+  globe: `
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18" />
+      <path d="M12 3c2.4 2.5 3.6 5.5 3.6 9S14.4 18.5 12 21" />
+      <path d="M12 3c-2.4 2.5-3.6 5.5-3.6 9S9.6 18.5 12 21" />
+    </svg>
+  `,
+};
+---
+
+<section class="service-areas" id="service-areas">
+  <div class="service-areas__inner">
+    <div class="service-areas__content">
+      <p class="eyebrow">{eyebrow}</p>
+
+      <h2 class="main-title">
+        {title}
+      </h2>
+
+      <p class="service-areas__text">
+        {text}
+      </p>
+    </div>
+
+    <div class="service-areas__list">
+      {areas.map((area) => (
+        <article class="service-areas__item">
+          <span
+            class="service-areas__icon"
+            aria-hidden="true"
+            set:html={icons[area.icon] ?? icons.pin}
+          />
+
+          <div>
+            <h3 class="service-areas__item-title">
+              {area.title}
+            </h3>
+
+            <p class="service-areas__item-text">
+              {area.text}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

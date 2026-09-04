@@ -1,0 +1,57 @@
+---
+import { ClientRouter } from "astro:transitions";
+
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+import ContactModal from "../components/common/ContactModal.astro";
+import SeoHead from "../components/layout/SeoHead.astro";
+
+import "../styles/global.css";
+
+const {
+  lang = "en",
+  routeKey,
+  title,
+  description,
+  canonicalPath,
+  noFrenchAlternate = false,
+  disabledLanguages = [],
+} = Astro.props;
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <SeoHead
+      lang={lang}
+      title={title}
+      description={description}
+      routeKey={routeKey}
+      canonicalPath={canonicalPath}
+      noFrenchAlternate={noFrenchAlternate}
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <ClientRouter />
+  </head>
+
+  <body>
+    <Header lang={lang} disabledLanguages={disabledLanguages} />
+
+    <main transition:animate="fade">
+      <slot />
+    </main>
+
+    <Footer lang={lang} />
+
+    <ContactModal lang={lang} />
+
+    <script>
+      import "../scripts/menu.js";
+      import "../scripts/contact-modal.js";
+      import "../scripts/left-menu.js";
+    </script>
+  </body>
+</html>

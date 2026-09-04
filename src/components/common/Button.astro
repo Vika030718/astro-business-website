@@ -1,0 +1,32 @@
+---
+const {
+  href,
+  variant = "primary",
+  contactModal = false,
+  type = "button",
+  dataContactSubmit = false,
+} = Astro.props;
+
+const className = `button button--${variant}`;
+---
+
+{
+  href ? (
+    <a
+      class={className}
+      href={href}
+      data-contact-open={contactModal ? "true" : undefined}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button
+      class={className}
+      type={type}
+      data-contact-open={contactModal ? "true" : undefined}
+      data-contact-submit={dataContactSubmit ? "true" : undefined}
+    >
+      <slot />
+    </button>
+  )
+}

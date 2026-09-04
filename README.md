@@ -65,4 +65,4 @@ This included translating business requirements into the website structure and v
 
 ## Live Demo
 
-Live demo coming soon.
+https://astro-business-website.netlify.app/
